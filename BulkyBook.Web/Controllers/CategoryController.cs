@@ -1,4 +1,5 @@
 ﻿using BulkyBook.Web.Data;
+using BulkyBook.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyBook.Web.Controllers;
@@ -11,9 +12,10 @@ public class CategoryController : Controller
     {
         _dataContext = dataContext;
     }
+
     public IActionResult Index()
     {
-        var objCategoryList = _dataContext.Categories.ToList();
-        return View();
+        IEnumerable<Category> objCategoryList = _dataContext.Categories;
+        return View(objCategoryList);
     }
 }
