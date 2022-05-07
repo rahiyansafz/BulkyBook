@@ -3,25 +3,40 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index Category</h1>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">List of Categories</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-dark" asp-area="" asp-controller="Category" asp-action="Create">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Category
+            </a>
+        </div>
+        <hr />
+    </div>
 
-<table class="table caption-top table-bordered">
-    <caption>List of Categories</caption>
-    <thead>
-        <tr>
-            <th scope="col" class="text-center">Category Name</th>
-            <th scope="col" class="text-center">Display Order</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var obj in Model)
-        {
+    <br />
+
+    <table class="table caption-top table-bordered">
+        @*<caption>List of Categories</caption>*@
+        <thead>
             <tr>
-                @*                <th scope="row">1</th>
-                *@
-                <td class="text-center">@obj.Name</td>
-                <td class="text-center">@obj.DisplayOrder</td>
+                <th scope="col" class="text-center">Category Name</th>
+                <th scope="col" class="text-center">Display Order</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    @*                <th scope="row">1</th>
+                    *@
+                    <td class="text-center">@obj.Name</td>
+                    <td class="text-center">@obj.DisplayOrder</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
