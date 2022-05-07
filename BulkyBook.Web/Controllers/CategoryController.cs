@@ -24,4 +24,14 @@ public class CategoryController : Controller
     {
         return View();
     }
+
+    //POST
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Create(Category obj)
+    {
+        _dataContext.Categories.Add(obj);
+        _dataContext.SaveChanges();
+        return RedirectToAction("Index");
+    }
 }
