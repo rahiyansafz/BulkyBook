@@ -18,4 +18,10 @@ public class CategoryController : Controller
         IEnumerable<Category> objCategoryList = _dataContext.Categories;
         return View(objCategoryList);
     }
+
+    //GET
+    public IActionResult Create()
+    {
+        return View();
+    }
 }

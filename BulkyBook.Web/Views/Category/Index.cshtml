@@ -18,25 +18,26 @@
 
     <br />
 
-    <table class="table caption-top table-bordered">
-        @*<caption>List of Categories</caption>*@
-        <thead>
-            <tr>
-                <th scope="col" class="text-center">Category Name</th>
-                <th scope="col" class="text-center">Display Order</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
+    <div class="px-3">
+        <table class="table caption-top table-bordered">
+            @*<caption>List of Categories</caption>*@
+            <thead>
                 <tr>
-                    @*                <th scope="row">1</th>
-                    *@
-                    <td class="text-center">@obj.Name</td>
-                    <td class="text-center">@obj.DisplayOrder</td>
+                    <th scope="col" class="text-center">Category Name</th>
+                    <th scope="col" class="text-center">Display Order</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        @*                <th scope="row">1</th>
+                        *@
+                        <td class="text-center">@obj.Name</td>
+                        <td class="text-center">@obj.DisplayOrder</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
