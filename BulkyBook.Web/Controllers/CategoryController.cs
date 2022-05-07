@@ -30,6 +30,10 @@ public class CategoryController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(Category obj)
     {
+        if(obj.Name == obj.DisplayOrder.ToString())
+        {
+            ModelState.AddModelError("CustomError", "The Display Order cannot exactly match the Name");
+        }
         if (ModelState.IsValid)
         {
             _dataContext.Categories.Add(obj);

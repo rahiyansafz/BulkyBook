@@ -31,3 +31,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+/*
+.validation-summary-errors {
+    background-color: #D9FFB2;
+    border: 1px solid #5CBA30;
+    width: 400px;
+}
+*/
