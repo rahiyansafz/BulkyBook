@@ -30,7 +30,39 @@ public class CategoryController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(Category obj)
     {
-        if(obj.Name == obj.DisplayOrder.ToString())
+        if (obj.Name == obj.DisplayOrder.ToString())
+        {
+            ModelState.AddModelError("CustomError", "The Display Order cannot exactly match the Name");
+        }
+        if (ModelState.IsValid)
+        {
+            _dataContext.Categories.Add(obj);
+            _dataContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        return View(obj);
+    }
+
+    //GET
+    public IActionResult Edit(int? id)
+    {
+        if (id is null & id is 0)
+            return NotFound();
+
+        var category = _dataContext.Categories.FirstOrDefault(c => c.Id == id);
+
+        if (category is null)
+            return NotFound();
+
+        return View(category);
+    }
+
+    //POST
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(Category obj)
+    {
+        if (obj.Name == obj.DisplayOrder.ToString())
         {
             ModelState.AddModelError("CustomError", "The Display Order cannot exactly match the Name");
         }
