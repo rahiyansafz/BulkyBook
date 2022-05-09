@@ -1,35 +1,33 @@
 ﻿@*@{
-    ViewData["Title"] = "Edit";
-    }
-*@
+    ViewData["Title"] = "Remove";
+    }*@
 
 @model Category
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-dark">Edit Category</h2>
+            <h2 class="text-dark">Remove Category</h2>
         </div>
         <hr />
     </div>
 
     <div class="pt-2" asp-validation-summary="All"></div>
 
-    <form method="post" asp-action="Edit">
+    <form method="post" asp-action="Remove">
+        <input asp-for="Id" hidden />
         <div class="px-3">
             <div>
                 <fieldset>
                     <div class="form-group m-3 mt-1">
                         <label asp-for="Name" class="form-label"></label>
-                        <input asp-for="Name" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter Name" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <input asp-for="Name" type="text" disabled class="form-control" id="name" aria-describedby="name" placeholder="Enter Name" />
                     </div>
                     <div class="form-group m-3 mt-1">
                         <label asp-for="DisplayOrder" class="form-label"></label>
-                        <input asp-for="DisplayOrder" type="number" class="form-control" id="order" placeholder="Display Order" />
-                        <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                        <input asp-for="DisplayOrder" disabled type="number" class="form-control" id="order" placeholder="Display Order" />
                     </div>
-                    <button type="submit" class="btn btn-dark m-2">Update</button>
+                    <button type="submit" class="btn btn-dark m-2">Remove</button>
                     <a class="btn btn-dark m-2" asp-area=" asp-controller="Category" asp-action="Index">
                         Back To List
                     </a>

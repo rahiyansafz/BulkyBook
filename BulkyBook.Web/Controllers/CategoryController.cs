@@ -74,4 +74,33 @@ public class CategoryController : Controller
         }
         return View(obj);
     }
+
+    //GET
+    public IActionResult Remove(int? id)
+    {
+        if (id is null & id is 0)
+            return NotFound();
+
+        var category = _dataContext.Categories.FirstOrDefault(c => c.Id == id);
+
+        if (category is null)
+            return NotFound();
+
+        return View(category);
+    }
+
+    //POST
+    [HttpPost,ActionName("Remove")]
+    [ValidateAntiForgeryToken]
+    public IActionResult RemovePOST(int? id)
+    {
+
+        var category = _dataContext.Categories.FirstOrDefault(c => c.Id == id);
+        if (category is null)
+            return NotFound();
+
+        _dataContext.Categories.Remove(category);
+        _dataContext.SaveChanges();
+        return RedirectToAction("Index");
+    }
 }
