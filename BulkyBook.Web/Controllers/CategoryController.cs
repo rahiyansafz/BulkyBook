@@ -1,56 +1,57 @@
 ﻿using BulkyBook.Web.Data;
 using BulkyBook.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BulkyBook.Web.Controllers;
 
 public class CategoryController : Controller
 {
-    private readonly DataContext _dataContext;
+    private readonly DataContext _context;
 
-    public CategoryController(DataContext dataContext)
+    public CategoryController(DataContext context)
     {
-        _dataContext = dataContext;
+        _context = context;
     }
 
-    public IActionResult Index()
+    // GET: Category
+    public async Task<IActionResult> Index()
     {
-        IEnumerable<Category> objCategoryList = _dataContext.Categories;
-        return View(objCategoryList);
+        return View(await _context.Categories.ToListAsync());
     }
 
-    //GET
+    //GET: Category/Create
     public IActionResult Create()
     {
         return View();
     }
 
-    //POST
+    //POST: Category/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Category obj)
+    public async Task<IActionResult> Create(Category category)
     {
-        if (obj.Name == obj.DisplayOrder.ToString())
+        if (category.Name == category.DisplayOrder.ToString())
         {
             ModelState.AddModelError("CustomError", "The Display Order cannot exactly match the Name");
         }
         if (ModelState.IsValid)
         {
-            _dataContext.Categories.Add(obj);
-            _dataContext.SaveChanges();
+            _context.Categories.Add(category);
+            await _context.SaveChangesAsync();
             TempData["success"] = "Category Created Successfully!";
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
-        return View(obj);
+        return View(category);
     }
 
-    //GET
-    public IActionResult Edit(int? id)
+    // GET: Category/Edit/1
+    public async Task<IActionResult> Edit(int? id)
     {
-        if (id is null & id is 0)
+        if (id is null & id == 0)
             return NotFound();
 
-        var category = _dataContext.Categories.FirstOrDefault(c => c.Id == id);
+        var category = await _context.Categories.FindAsync(id);
 
         if (category is null)
             return NotFound();
@@ -58,32 +59,42 @@ public class CategoryController : Controller
         return View(category);
     }
 
-    //POST
+    //POST: Category/Edit/1
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Edit(Category obj)
+    public async Task<IActionResult> Edit(Category category)
     {
-        if (obj.Name == obj.DisplayOrder.ToString())
+        if (category.Name == category.DisplayOrder.ToString())
         {
             ModelState.AddModelError("CustomError", "The Display Order cannot exactly match the Name");
         }
         if (ModelState.IsValid)
         {
-            _dataContext.Categories.Update(obj);
-            _dataContext.SaveChanges();
-            TempData["success"] = "Category Updated Successfully!";
-            return RedirectToAction("Index");
+            try
+            {
+                _context.Categories.Update(category);
+                await _context.SaveChangesAsync();
+                TempData["success"] = "Category Updated Successfully!";
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CategoryExists(category.Id))
+                    return NotFound();
+                else
+                    throw;
+            }
+            return RedirectToAction(nameof(Index));
         }
-        return View(obj);
+        return View(category);
     }
 
-    //GET
-    public IActionResult Remove(int? id)
+    //GET: Category/Remove/1
+    public async Task<IActionResult> Remove(int? id)
     {
-        if (id is null & id is 0)
+        if (id is null & id == 0)
             return NotFound();
 
-        var category = _dataContext.Categories.FirstOrDefault(c => c.Id == id);
+        var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
 
         if (category is null)
             return NotFound();
@@ -94,16 +105,21 @@ public class CategoryController : Controller
     //POST
     [HttpPost, ActionName("Remove")]
     [ValidateAntiForgeryToken]
-    public IActionResult RemovePOST(int? id)
+    public async Task<IActionResult> RemovePOST(int? id)
     {
 
-        var category = _dataContext.Categories.FirstOrDefault(c => c.Id == id);
+        var category = await _context.Categories.FindAsync(id);
         if (category is null)
             return NotFound();
 
-        _dataContext.Categories.Remove(category);
-        _dataContext.SaveChanges();
+        _context.Categories.Remove(category);
+        await _context.SaveChangesAsync();
         TempData["success"] = "Category Removed Successfully!";
-        return RedirectToAction("Index");
+        return RedirectToAction(nameof(Index));
+    }
+
+    private bool CategoryExists(int id)
+    {
+        return _context.Categories.Any(c => c.Id == id);
     }
 }
