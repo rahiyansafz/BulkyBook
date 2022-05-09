@@ -68,7 +68,7 @@ public class CategoryController : Controller
         }
         if (ModelState.IsValid)
         {
-            _dataContext.Categories.Add(obj);
+            _dataContext.Categories.Update(obj);
             _dataContext.SaveChanges();
             return RedirectToAction("Index");
         }
