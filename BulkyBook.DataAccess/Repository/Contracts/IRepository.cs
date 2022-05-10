@@ -5,8 +5,8 @@ namespace BulkyBook.DataAccess.Repository.Contracts;
 
 public interface IRepository<T> where T : class
 {
-    Task<T> Find(Expression<Func<T, bool>> filter);
-    Task<IEnumerable<T>> GetAll();
+    T Find(Expression<Func<T, bool>> filter);
+    IEnumerable<T> GetAll();
     void Add(T entity);
     void Remove(T entity);
     void RemoveRange(IEnumerable<T> entity);

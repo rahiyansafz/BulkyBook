@@ -13,9 +13,9 @@ public class CategoryRepository : Repository<Category>, ICategoryRepository
         _context = context;
     }
 
-    public async void Save()
+    public void Save()
     {
-        await _context.SaveChangesAsync();
+        _context.SaveChanges();
     }
 
     public void Update(Category category)
