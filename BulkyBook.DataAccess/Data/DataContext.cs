@@ -11,4 +11,5 @@ public class DataContext : DbContext
     }
 
     public DbSet<Category> Categories { get; set; } = null!;
+    public DbSet<CoverType> CoverTypes { get; set; } = null!;
 }

@@ -11,9 +11,11 @@ public class UnitOfWork : IUnitOfWork
     {
         _context = context;
         Category = new CategoryRepository(_context);
+        CoverType = new CoverTypeRepository(_context);
     }
 
     public ICategoryRepository Category { get; private set; }
+    public ICoverTypeRepository CoverType { get; private set; }
 
     public void Save()
     {
