@@ -4213,13 +4213,13 @@ fieldset:disabled .btn {
 
     .dropdown-item:hover, .dropdown-item:focus {
         color: #fff;
-        background-color: #d9230f;
+        background-color: #f7f7f7;
     }
 
     .dropdown-item.active, .dropdown-item:active {
         color: #fff;
         text-decoration: none;
-        background-color: #d9230f;
+        background-color: #f7f7f7;
     }
 
     .dropdown-item.disabled, .dropdown-item:disabled {
