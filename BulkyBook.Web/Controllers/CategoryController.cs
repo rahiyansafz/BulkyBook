@@ -37,7 +37,7 @@ public class CategoryController : Controller
         }
         if (ModelState.IsValid)
         {
-            _context.Categories.Add(category);
+            await _context.Categories.AddAsync(category);
             await _context.SaveChangesAsync();
             TempData["success"] = "Category Created Successfully!";
             return RedirectToAction(nameof(Index));
