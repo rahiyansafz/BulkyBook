@@ -1,0 +1,40 @@
+﻿@*@{
+    ViewData["Title"] = "Remove";
+    }*@
+
+@model CoverType
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Remove CoverType</h2>
+        </div>
+        <hr />
+    </div>
+
+    <div class="pt-2" asp-validation-summary="All"></div>
+
+    <form method="post" asp-action="Remove">
+        <input asp-for="Id" hidden />
+        <div class="px-3">
+            <div>
+                <fieldset>
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" type="text" disabled class="form-control" id="name" aria-describedby="name" placeholder="Enter Name" />
+                    </div>
+                    <button type="submit" class="btn btn-dark m-2">Remove</button>
+                    <a class="btn btn-dark m-2" asp-controller="CoverType" asp-action="Index">
+                        Back To List
+                    </a>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+}

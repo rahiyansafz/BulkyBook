@@ -1,0 +1,41 @@
+﻿@*@{
+    ViewData["Title"] = "Edit";
+    }
+*@
+
+@model CoverType
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Edit CoverType</h2>
+        </div>
+        <hr />
+    </div>
+
+    <div class="pt-2" asp-validation-summary="All"></div>
+
+    <form method="post" asp-action="Edit">
+        <div class="px-3">
+            <div>
+                <fieldset>
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-dark m-2">Update</button>
+                    <a class="btn btn-dark m-2" asp-controller="CoverType" asp-action="Index">
+                        Back To List
+                    </a>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+}
