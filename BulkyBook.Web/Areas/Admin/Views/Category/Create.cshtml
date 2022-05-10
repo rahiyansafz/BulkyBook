@@ -1,21 +1,16 @@
-﻿@*@{
-    ViewData["Title"] = "Edit";
-    }
-*@
-
-@model Category
+﻿@model Category
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-dark">Edit Category</h2>
+            <h2 class="text-dark">Create Category</h2>
         </div>
         <hr />
     </div>
 
     <div class="pt-2" asp-validation-summary="All"></div>
 
-    <form method="post" asp-action="Edit">
+    <form method="post">
         <div class="px-3">
             <div>
                 <fieldset>
@@ -29,8 +24,8 @@
                         <input asp-for="DisplayOrder" type="number" class="form-control" id="order" placeholder="Display Order" />
                         <span asp-validation-for="DisplayOrder" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-dark m-2">Update</button>
-                    <a class="btn btn-dark m-2" asp-area=" asp-controller="Category" asp-action="Index">
+                    <button type="submit" class="btn btn-dark m-2">Create</button>
+                    <a class="btn btn-dark m-2" asp-controller="Category" asp-action="Index">
                         Back To List
                     </a>
                 </fieldset>
