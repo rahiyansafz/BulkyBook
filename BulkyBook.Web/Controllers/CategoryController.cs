@@ -8,17 +8,17 @@ namespace BulkyBook.Web.Controllers;
 
 public class CategoryController : Controller
 {
-    private readonly ICategoryRepository _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CategoryController(ICategoryRepository context)
+    public CategoryController(IUnitOfWork unitOfWork)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     // GET: Category
     public IActionResult Index()
     {
-        IEnumerable<Category> categories = _context.GetAll();
+        IEnumerable<Category> categories = _unitOfWork.Category.GetAll();
         return View(categories);
     }
 
@@ -39,8 +39,8 @@ public class CategoryController : Controller
         }
         if (ModelState.IsValid)
         {
-            _context.Add(category);
-            _context.Save();
+            _unitOfWork.Category.Add(category);
+            _unitOfWork.Save();
             TempData["success"] = "Category Created Successfully!";
             return RedirectToAction(nameof(Index));
         }
@@ -53,7 +53,7 @@ public class CategoryController : Controller
         if (id is null & id == 0)
             return NotFound();
 
-        var category = _context.Find(x => x.Id == id);
+        var category = _unitOfWork.Category.Find(x => x.Id == id);
 
         if (category is null)
             return NotFound();
@@ -73,8 +73,8 @@ public class CategoryController : Controller
         if (ModelState.IsValid)
         {
 
-            _context.Update(category);
-            _context.Save();
+            _unitOfWork.Category.Update(category);
+            _unitOfWork.Save();
             TempData["success"] = "Category Updated Successfully!";
             return RedirectToAction(nameof(Index));
         }
@@ -87,7 +87,7 @@ public class CategoryController : Controller
         if (id is null & id == 0)
             return NotFound();
 
-        var category = _context.Find(c => c.Id == id);
+        var category = _unitOfWork.Category.Find(c => c.Id == id);
 
         if (category is null)
             return NotFound();
@@ -101,12 +101,12 @@ public class CategoryController : Controller
     public IActionResult RemovePOST(int? id)
     {
 
-        var category = _context.Find(c => c.Id == id);
+        var category = _unitOfWork.Category.Find(c => c.Id == id);
         if (category is null)
             return NotFound();
 
-        _context.Remove(category);
-        _context.Save();
+        _unitOfWork.Category.Remove(category);
+        _unitOfWork.Save();
         TempData["success"] = "Category Removed Successfully!";
         return RedirectToAction(nameof(Index));
     }
