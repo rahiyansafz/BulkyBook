@@ -26,21 +26,16 @@ public class ProductController : Controller
     public IActionResult Upsert(int? id)
     {
         Product product = new();
-        IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(
-            x => new SelectListItem
-            {
-                Text = x.Name,
-                Value = x.Id.ToString(),
-            });
-        IEnumerable<SelectListItem> CoverTypeList = _unitOfWork.CoverType.GetAll().Select(
+        IEnumerable<SelectListItem> Categories = _unitOfWork.Category.GetAll().Select(
             x => new SelectListItem
             {
                 Text = x.Name,
                 Value = x.Id.ToString(),
             });
 
-        if (id is null & id == 0)
+        if (id is null || id == 0)
         {
+            ViewBag.Categories = Categories;
             return View(product);
         }
         else
