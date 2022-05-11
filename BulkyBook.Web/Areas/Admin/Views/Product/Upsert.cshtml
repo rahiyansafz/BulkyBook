@@ -1,0 +1,79 @@
+﻿@model Product
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">Edit Product</h2>
+        </div>
+        <hr />
+    </div>
+
+    <div class="pt-2" asp-validation-summary="All"></div>
+
+    <form method="post" asp-action="Upsert">
+        <div class="py-3 px-4 border border-1 border-gray">
+            <div>
+                <fieldset>
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter Title" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea rows="3" asp-for="Description" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter Description"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="ISBN" class="form-label"></label>
+                        <input asp-for="ISBN" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter ISBN" />
+                        <span asp-validation-for="ISBN" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="Author" class="form-label"></label>
+                        <input asp-for="Author" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter Author Name" />
+                        <span asp-validation-for="Author" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="ListPrice" class="form-label"></label>
+                        <input asp-for="ListPrice" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter ListPrice" />
+                        <span asp-validation-for="ListPrice" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="Price" class="form-label"></label>
+                        <input asp-for="Price" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter Price" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="PriceFor5" class="form-label"></label>
+                        <input asp-for="PriceFor5" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter Price For 5 Set of Books" />
+                        <span asp-validation-for="PriceFor5" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="PriceFor10" class="form-label"></label>
+                        <input asp-for="PriceFor10" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter Price For 10 Set of Books" />
+                        <span asp-validation-for="PriceFor10" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark m-2">Update</button>
+                    <a class="btn btn-dark m-2" asp-controller="CoverType" asp-action="Index">
+                        Back To List
+                    </a>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+}

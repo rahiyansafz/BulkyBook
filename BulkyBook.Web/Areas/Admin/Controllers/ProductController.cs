@@ -19,37 +19,18 @@ public class ProductController : Controller
         return View(products);
     }
 
-    //GET: Product/Create
-    public IActionResult Create()
-    {
-        return View();
-    }
-
-    //POST: Product/Create
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Create(Product product)
-    {
-        if (ModelState.IsValid)
-        {
-            _unitOfWork.Product.Add(product);
-            _unitOfWork.Save();
-            TempData["success"] = "Product Created Successfully!";
-            return RedirectToAction(nameof(Index));
-        }
-        return View(product);
-    }
-
     // GET: Product/Edit/1
-    public IActionResult Edit(int? id)
+    public IActionResult Upsert(int? id)
     {
+        Product product = new();
         if (id is null & id == 0)
-            return NotFound();
+        {
+            return View(product);
+        }
+        else
+        {
 
-        var product = _unitOfWork.Product.Find(x => x.Id == id);
-
-        if (product is null)
-            return NotFound();
+        }
 
         return View(product);
     }
@@ -57,7 +38,7 @@ public class ProductController : Controller
     //POST: Product/Edit/1
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Edit(Product product)
+    public IActionResult Upsert(Product product)
     {
         if (ModelState.IsValid)
         {
