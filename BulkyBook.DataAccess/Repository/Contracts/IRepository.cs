@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-
 namespace BulkyBook.DataAccess.Repository.Contracts;
 
 public interface IRepository<T> where T : class
