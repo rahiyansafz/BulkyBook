@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BulkyBook.Models.Models;
 
@@ -16,4 +17,24 @@ public class Product
     [Required]
     [Range(1, 10000)]
     public double ListPrice { get; set; }
+    [Required]
+    [Range(1, 10000)]
+    public double Price { get; set; }
+    [Required]
+    [Range(1, 10000)]
+    public double PriceFor5 { get; set; }
+    [Required]
+    [Range(1, 10000)]
+    public double PriceFor10 { get; set; }
+    [Required]
+    public string ImageUrl { get; set; } = string.Empty;
+
+    [Required]
+    public int CategoryId { get; set; }
+    [ForeignKey("CategoryId")]
+    public Category Category { get; set; }
+    [Required]
+    public int CoverTypeId { get; set; }
+    [ForeignKey("CoverTypeId")]
+    public CoverType CoverType { get; set; }
 }
