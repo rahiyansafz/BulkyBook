@@ -1,0 +1,31 @@
+﻿<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-dark">List of Products</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-dark" asp-controller="Product" asp-action="Create">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Product
+            </a>
+        </div>
+        <hr />
+    </div>
+
+    <br />
+
+    <div class="px-3">
+        <table class="table caption-top table-bordered">
+            @*<caption>List of CoverTypes</caption>*@
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Title</th>
+                    <th scope="col" class="text-center">ISBN</th>
+                    <th scope="col" class="text-center">Price</th>
+                    <th scope="col" class="text-center">Author</th>
+                    <th scope="col" class="text-center">Category</th>
+                    <th scope="col" class="text-center">Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
