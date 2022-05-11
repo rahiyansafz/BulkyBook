@@ -1,5 +1,6 @@
 ﻿using BulkyBook.DataAccess.Repository.Contracts;
 using BulkyBook.Models.Models;
+using BulkyBook.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -25,33 +26,33 @@ public class ProductController : Controller
     // GET: Product/Edit/1
     public IActionResult Upsert(int? id)
     {
-        Product product = new();
-        IEnumerable<SelectListItem> Categories = _unitOfWork.Category.GetAll().Select(
-            x => new SelectListItem
+        ProductViewModel productViewModel = new()
+        {
+            Product = new(),
+            Categories = _unitOfWork.Category.GetAll().Select(i => new SelectListItem
             {
-                Text = x.Name,
-                Value = x.Id.ToString(),
-            });
-
-        IEnumerable<SelectListItem> CoverTypes = _unitOfWork.CoverType.GetAll().Select(
-            x => new SelectListItem
+                Text = i.Name,
+                Value = i.Id.ToString()
+            }),
+            CoverTypes = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
             {
-                Text = x.Name,
-                Value = x.Id.ToString(),
-            });
+                Text = i.Name,
+                Value = i.Id.ToString()
+            }),
+        };
 
         if (id is null || id == 0)
         {
-            ViewBag.Categories = Categories;
-            ViewData["CoverTypes"] = CoverTypes;
-            return View(product);
+            //ViewBag.Categories = Categories;
+            //ViewData["CoverTypes"] = CoverTypes;
+            return View(productViewModel);
         }
         else
         {
 
         }
 
-        return View(product);
+        return View(productViewModel);
     }
 
     //POST: Product/Edit/1
