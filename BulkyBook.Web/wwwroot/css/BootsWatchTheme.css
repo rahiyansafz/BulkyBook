@@ -2394,7 +2394,6 @@ progress {
     background-color: #fcfcfc;
     border-color: #ec9187;
     outline: 0;
-    /*box-shadow: 0 0 0 0.25rem rgba(217, 35, 15, 0.25);*/
 }
 
 .form-control::-webkit-date-and-time-value {
@@ -2610,7 +2609,6 @@ textarea.form-control-lg {
 .form-select:focus {
     border-color: #ec9187;
     outline: 0;
-    /*box-shadow: 0 0 0 0.25rem rgba(217, 35, 15, 0.25);*/
 }
 
 .form-select[multiple], .form-select[size]:not([size="1"]) {
@@ -3293,7 +3291,7 @@ textarea.form-control-lg {
 
 .btn-check:focus + .btn, .btn:focus {
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(217, 35, 15, 0.25);
+    /*box-shadow: 0 0 0 0.25rem rgba(217, 35, 15, 0.25);*/
 }
 
 .btn:disabled, .btn.disabled,
@@ -3591,7 +3589,6 @@ fieldset:disabled .btn {
         color: #fff;
         background-color: #2f3133;
         border-color: #2c2e30;
-        box-shadow: 0 0 0 0.25rem rgba(85, 88, 89, 0.5);
     }
 
     .btn-check:checked + .btn-dark,
@@ -3605,7 +3602,7 @@ fieldset:disabled .btn {
         .btn-check:checked + .btn-dark:focus,
         .btn-check:active + .btn-dark:focus, .btn-dark:active:focus, .btn-dark.active:focus,
         .show > .btn-dark.dropdown-toggle:focus {
-            box-shadow: 0 0 0 0.25rem rgba(85, 88, 89, 0.5);
+            /*box-shadow: 0 0 0 0.25rem rgba(85, 88, 89, 0.5);*/
         }
 
     .btn-dark:disabled, .btn-dark.disabled {
