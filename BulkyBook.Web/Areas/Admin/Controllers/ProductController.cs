@@ -33,9 +33,17 @@ public class ProductController : Controller
                 Value = x.Id.ToString(),
             });
 
+        IEnumerable<SelectListItem> CoverTypes = _unitOfWork.CoverType.GetAll().Select(
+            x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+            });
+
         if (id is null || id == 0)
         {
             ViewBag.Categories = Categories;
+            ViewData["CoverTypes"] = CoverTypes;
             return View(product);
         }
         else
