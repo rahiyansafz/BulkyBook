@@ -50,7 +50,7 @@ public class CategoryController : Controller
     // GET: Category/Edit/1
     public IActionResult Edit(int? id)
     {
-        if (id is null & id == 0)
+        if (id is null || id == 0)
             return NotFound();
 
         var category = _unitOfWork.Category.Find(x => x.Id == id);
@@ -84,7 +84,7 @@ public class CategoryController : Controller
     //GET: Category/Remove/1
     public IActionResult Remove(int? id)
     {
-        if (id is null & id == 0)
+        if (id is null || id == 0)
             return NotFound();
 
         var category = _unitOfWork.Category.Find(c => c.Id == id);

@@ -43,7 +43,7 @@ public class CoverTypeController : Controller
     // GET: CoverType/Edit/1
     public IActionResult Edit(int? id)
     {
-        if (id is null & id == 0)
+        if (id is null || id == 0)
             return NotFound();
 
         var coverType = _unitOfWork.CoverType.Find(x => x.Id == id);
@@ -73,7 +73,7 @@ public class CoverTypeController : Controller
     //GET: CoverType/Remove/1
     public IActionResult Remove(int? id)
     {
-        if (id is null & id == 0)
+        if (id is null || id == 0)
             return NotFound();
 
         var coverType = _unitOfWork.CoverType.Find(c => c.Id == id);

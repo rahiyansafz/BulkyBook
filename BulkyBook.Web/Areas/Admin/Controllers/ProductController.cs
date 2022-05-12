@@ -74,7 +74,7 @@ public class ProductController : Controller
     //GET: Product/Remove/1
     public IActionResult Remove(int? id)
     {
-        if (id is null & id == 0)
+        if (id is null || id == 0)
             return NotFound();
 
         var product = _unitOfWork.Product.Find(c => c.Id == id);
