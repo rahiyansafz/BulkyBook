@@ -4,7 +4,7 @@
 
 @model BulkyBook.Models.ViewModels.ProductViewModel
 
-<div class="container p-3 pt-2">
+<div class="container p-3 pt-2 row">
     <div class="row">
         <div class="col-6">
             <h3 class="display-7 text-dark font-weight-bold">Edit Product</h3>
@@ -14,7 +14,7 @@
 
     <div asp-validation-summary="All"></div>
 
-    <form method="post" asp-action="Upsert">
+    <form method="post" asp-action="Upsert" enctype="multipart/form-data">
         <div class="py-3 px-4 border border-1 border-gray">
             <div>
                 <fieldset>
@@ -63,7 +63,11 @@
                     <div class="form-group m-3 mt-1">
                         <label asp-for="Product.PriceFor10" class="form-label"></label>
                         <input asp-for="Product.PriceFor10" type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter Price For 10 Set of Books" />
-                        <span asp-validation-for="Product.PriceFor10" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group m-3 mt-1">
+                        <label asp-for="Product.ImageUrl" class="form-label"></label>
+                        <input class="form-control form-control-sm" id="formFileSm" type="file">
                     </div>
 
                     <div class="form-group m-3 mt-1">
