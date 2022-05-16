@@ -4,10 +4,10 @@
 
 @model IEnumerable<Category>
 
-<div class="container p-3">
-    <div class="row pt-4">
+<div class="container p-3 pt-2">
+    <div class="row">
         <div class="col-6">
-            <h2 class="text-dark">List of Categories</h2>
+            <h3 class="display-7 text-dark font-weight-bold">List of Categories</h3>
         </div>
         <div class="col-6 text-end">
             <a class="btn btn-dark" asp-controller="Category" asp-action="Create">
@@ -17,10 +17,8 @@
         <hr />
     </div>
 
-    <br />
-
     <div class="py-3 px-4">
-        <table class="table caption-top table-bordered">
+        <table class="table">
             @*<caption>List of Categories</caption>*@
             <thead>
                 <tr>
