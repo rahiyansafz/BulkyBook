@@ -21,8 +21,7 @@ public class ProductController : Controller
 
     public IActionResult Index()
     {
-        IEnumerable<Product> products = _unitOfWork.Product.GetAll();
-        return View(products);
+        return View();
     }
 
     // GET: Product/Edit/1
@@ -116,4 +115,13 @@ public class ProductController : Controller
     //    TempData["success"] = "Product Removed Successfully!";
     //    return RedirectToAction(nameof(Index));
     //}
+
+    #region API CALLS
+    [HttpGet]
+    public ActionResult GetAll()
+    {
+        var products = _unitOfWork.Product.GetAll();
+        return Json(new { data = products });
+    }
+    #endregion
 }
