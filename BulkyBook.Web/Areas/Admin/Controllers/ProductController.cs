@@ -11,10 +11,12 @@ namespace BulkyBook.Web.Areas.Admin.Controllers;
 public class ProductController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public ProductController(IUnitOfWork unitOfWork)
+    public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
     {
         _unitOfWork = unitOfWork;
+        _webHostEnvironment = webHostEnvironment;
     }
 
     public IActionResult Index()
@@ -58,45 +60,60 @@ public class ProductController : Controller
     //POST: Product/Edit/1
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Upsert(ProductViewModel product, IFormFile file)
+    public IActionResult Upsert(ProductViewModel upsertProduct, IFormFile? file)
     {
         if (ModelState.IsValid)
         {
-            //_unitOfWork.Product.Update(product);
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+            if (file is not null)
+            {
+                string fileName = Guid.NewGuid().ToString();
+                var upload = Path.Combine(wwwRootPath, @"images\products");
+                var ext = Path.GetExtension(file.FileName);
+
+                using (var stream = new FileStream(Path.Combine(upload, fileName + ext), FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                upsertProduct.Product.ImageUrl = @"\images\products\" + fileName + ext;
+            }
+
+            _unitOfWork.Product.Add(upsertProduct.Product);
             _unitOfWork.Save();
-            TempData["success"] = "Product Updated Successfully!";
+            TempData["success"] = "Product Added Successfully!";
             return RedirectToAction(nameof(Index));
         }
-        return View(product);
+        return View(upsertProduct);
     }
 
-    //GET: Product/Remove/1
-    public IActionResult Remove(int? id)
-    {
-        if (id is null || id == 0)
-            return NotFound();
+    ////GET: Product/Remove/1
+    //public IActionResult Remove(int? id)
+    //{
+    //    if (id is null || id == 0)
+    //        return NotFound();
 
-        var product = _unitOfWork.Product.Find(c => c.Id == id);
+    //    var product = _unitOfWork.Product.Find(c => c.Id == id);
 
-        if (product is null)
-            return NotFound();
+    //    if (product is null)
+    //        return NotFound();
 
-        return View(product);
-    }
+    //    return View(product);
+    //}
 
-    //POST
-    [HttpPost, ActionName("Remove")]
-    [ValidateAntiForgeryToken]
-    public IActionResult RemovePOST(int? id)
-    {
+    ////POST
+    //[HttpPost, ActionName("Remove")]
+    //[ValidateAntiForgeryToken]
+    //public IActionResult RemovePOST(int? id)
+    //{
 
-        var product = _unitOfWork.Product.Find(c => c.Id == id);
-        if (product is null)
-            return NotFound();
+    //    var product = _unitOfWork.Product.Find(c => c.Id == id);
+    //    if (product is null)
+    //        return NotFound();
 
-        _unitOfWork.Product.Remove(product);
-        _unitOfWork.Save();
-        TempData["success"] = "Product Removed Successfully!";
-        return RedirectToAction(nameof(Index));
-    }
+    //    _unitOfWork.Product.Remove(product);
+    //    _unitOfWork.Save();
+    //    TempData["success"] = "Product Removed Successfully!";
+    //    return RedirectToAction(nameof(Index));
+    //}
 }
