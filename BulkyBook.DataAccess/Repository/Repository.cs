@@ -13,6 +13,7 @@ public class Repository<T> : IRepository<T> where T : class
     public Repository(DataContext context)
     {
         _context = context;
+        //_context.Products.Include(p => p.Category).Include(p => p.CoverType);
         this.dbSet = _context.Set<T>();
     }
 
@@ -21,17 +22,33 @@ public class Repository<T> : IRepository<T> where T : class
         dbSet.Add(entity);
     }
 
-    public T Find(Expression<Func<T, bool>> filter)
+    public T Find(Expression<Func<T, bool>> filter, string? includeProps = null)
     {
         IQueryable<T> query = dbSet;
+
         query = query.Where(filter);
+        if (includeProps is not null)
+        {
+            foreach (var item in includeProps.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(item);
+            }
+        }
+
         T? t = query.FirstOrDefault();
         return t!;
     }
 
-    public IEnumerable<T> GetAll()
+    public IEnumerable<T> GetAll(string? includeProps = null)
     {
         IQueryable<T> query = dbSet;
+        if (includeProps is not null)
+        {
+            foreach (var item in includeProps.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(item);
+            }
+        }
         return query.ToList();
     }
 
