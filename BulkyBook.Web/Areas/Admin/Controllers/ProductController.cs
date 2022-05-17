@@ -50,10 +50,9 @@ public class ProductController : Controller
         }
         else
         {
-
+            productViewModel.Product = _unitOfWork.Product.Find(x => x.Id == id);
+            return View(productViewModel);
         }
-
-        return View(productViewModel);
     }
 
     //POST: Product/Edit/1
