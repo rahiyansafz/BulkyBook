@@ -11,19 +11,19 @@ function loadDataTable() {
         },
         "columns": [
             {
-                "data":"title","width":"15%"
+                "data": "title", className: 'dt-body-left'
             },
             {
-                "data": "isbn", "width": "15%"
+                "data": "isbn", className: 'dt-body-left'
             },
             {
-                "data": "price", "width": "15%"
+                "data": "price", className: 'dt-body-left'
             },
             {
-                "data": "author", "width": "15%"
+                "data": "author", className: 'dt-body-left'
             },
             {
-                "data": "category", "width": "15%"
+                "data": "category.name", className: 'dt-body-left'
             },
         ]
     });

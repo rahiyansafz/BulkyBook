@@ -118,9 +118,9 @@ public class ProductController : Controller
 
     #region API CALLS
     [HttpGet]
-    public ActionResult GetAll()
+    public IActionResult GetAll()
     {
-        var products = _unitOfWork.Product.GetAll();
+        var products = _unitOfWork.Product.GetAll(includeProps: "Category,CoverType");
         return Json(new { data = products });
     }
     #endregion
