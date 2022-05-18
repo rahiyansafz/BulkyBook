@@ -70,6 +70,15 @@ public class ProductController : Controller
                 var upload = Path.Combine(wwwRootPath, @"images\products");
                 var ext = Path.GetExtension(file.FileName);
 
+                if (upsertProduct.Product.ImageUrl is not null)
+                {
+                    var existingImagePath = Path.Combine(wwwRootPath, upsertProduct.Product.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(existingImagePath))
+                    {
+                        System.IO.File.Delete(existingImagePath);
+                    }
+                }
+
                 using (var stream = new FileStream(Path.Combine(upload, fileName + ext), FileMode.Create))
                 {
                     file.CopyTo(stream);
@@ -77,7 +86,14 @@ public class ProductController : Controller
                 upsertProduct.Product.ImageUrl = @"\images\products\" + fileName + ext;
             }
 
-            _unitOfWork.Product.Add(upsertProduct.Product);
+            if (upsertProduct.Product.Id == 0)
+            {
+                _unitOfWork.Product.Add(upsertProduct.Product);
+            }
+            else
+            {
+                _unitOfWork.Product.Update(upsertProduct.Product);
+            }
             _unitOfWork.Save();
             TempData["success"] = "Product Added Successfully!";
             return RedirectToAction(nameof(Index));

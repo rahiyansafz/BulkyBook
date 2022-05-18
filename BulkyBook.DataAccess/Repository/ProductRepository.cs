@@ -28,9 +28,8 @@ public class ProductRepository : Repository<Product>, IProductRepository
             findProduct.CategoryId = product.CategoryId;
             findProduct.Author = product.Author;
             findProduct.CoverTypeId = product.CoverTypeId;
-            if (findProduct.ImageUrl is not null)
-                findProduct.ImageUrl = findProduct.ImageUrl.ToString();
+            if (product.ImageUrl is not null)
+                findProduct.ImageUrl = product.ImageUrl;
         }
-        //_context.Products.Update(product);
     }
 }

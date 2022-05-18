@@ -31,8 +31,8 @@ public class Product
     [Display(Name = "Price for 10 set")]
     public double PriceFor10 { get; set; }
     [ValidateNever]
-    [Display(Name = "Image Url")]
-    public string ImageUrl { get; set; } = string.Empty;
+    [Display(Name = "Upload Image")]
+    public string ImageUrl { get; set; }
 
     [Required]
     [Display(Name = "Category")]
