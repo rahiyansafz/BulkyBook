@@ -11,7 +11,7 @@ function loadDataTable() {
         },
         "columns": [
             {
-                "data": "title", className: 'dt-body-left'
+                "data": "title", className: 'dt-body-left', "width": "30%"
             },
             {
                 "data": "isbn", className: 'dt-body-left'
@@ -20,7 +20,7 @@ function loadDataTable() {
                 "data": "price", className: 'dt-body-left'
             },
             {
-                "data": "author", className: 'dt-body-left'
+                "data": "author", className: 'd	978-0142424179	6.1	John Green	Romancet-body-left'
             },
             {
                 "data": "category.name", className: 'dt-body-left'

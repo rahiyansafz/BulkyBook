@@ -101,42 +101,29 @@ public class ProductController : Controller
         return View(upsertProduct);
     }
 
-    ////GET: Product/Remove/1
-    //public IActionResult Remove(int? id)
-    //{
-    //    if (id is null || id == 0)
-    //        return NotFound();
-
-    //    var product = _unitOfWork.Product.Find(c => c.Id == id);
-
-    //    if (product is null)
-    //        return NotFound();
-
-    //    return View(product);
-    //}
-
-    ////POST
-    //[HttpPost, ActionName("Remove")]
-    //[ValidateAntiForgeryToken]
-    //public IActionResult RemovePOST(int? id)
-    //{
-
-    //    var product = _unitOfWork.Product.Find(c => c.Id == id);
-    //    if (product is null)
-    //        return NotFound();
-
-    //    _unitOfWork.Product.Remove(product);
-    //    _unitOfWork.Save();
-    //    TempData["success"] = "Product Removed Successfully!";
-    //    return RedirectToAction(nameof(Index));
-    //}
-
     #region API CALLS
     [HttpGet]
     public IActionResult GetAll()
     {
         var products = _unitOfWork.Product.GetAll(includeProps: "Category,CoverType");
         return Json(new { data = products });
+    }
+
+    [HttpDelete]
+    public IActionResult Remove(int? id)
+    {
+
+        var product = _unitOfWork.Product.Find(c => c.Id == id);
+        if (product is null)
+            return Json(new { success = false, message = "Error while deleting! Tell your developoer to check server!" });
+
+        var existingImagePath = Path.Combine(_webHostEnvironment.WebRootPath, product.ImageUrl.TrimStart('\\'));
+        if (System.IO.File.Exists(existingImagePath))
+            System.IO.File.Delete(existingImagePath);
+
+        _unitOfWork.Product.Remove(product);
+        _unitOfWork.Save();
+        return Json(new { success = false, message = "Successfully Deleted!!!" });
     }
     #endregion
 }
