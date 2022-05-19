@@ -110,9 +110,8 @@ public class ProductController : Controller
     }
 
     [HttpDelete]
-    public IActionResult Remove(int? id)
+    public IActionResult Delete(int? id)
     {
-
         var product = _unitOfWork.Product.Find(c => c.Id == id);
         if (product is null)
             return Json(new { success = false, message = "Error while deleting! Tell your developoer to check server!" });
