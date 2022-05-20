@@ -56,10 +56,10 @@ function Delete(url) {
                 type: 'DELETE',
                 success: function (data) {
                     if (data.success) {
-                        //dataTable.ajax.reload();
-                        $('#table').DataTable().ajax.reload();
+                        dataTable.ajax.reload();
                         toastr.success(data.message);
-                    } else {
+                    }
+                    else {
                         toastr.error(data.message);
                     }
                 }
