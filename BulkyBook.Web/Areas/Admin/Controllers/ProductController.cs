@@ -122,7 +122,7 @@ public class ProductController : Controller
 
         _unitOfWork.Product.Remove(product);
         _unitOfWork.Save();
-        return Json(new { success = false, message = "Successfully Deleted!!!" });
+        return Json(new { success = true, message = "Successfully Deleted!!!" });
     }
     #endregion
 }
